@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         return imageView
     }()
     
-    let diceOneImageView: UIImageView = {
+    var diceOneImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "DiceOne")
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         return imageView
     }()
     
-    let diceTwoImageView: UIImageView = {
+    var diceTwoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "DiceTwo")
@@ -88,7 +88,13 @@ class ViewController: UIViewController {
             rollButton.widthAnchor.constraint(equalToConstant: 150),
             rollButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        rollButton.addTarget(self, action: #selector(rollDice), for: .touchUpInside)
     }
-
+    
+    @objc private func rollDice() {
+        diceOneImageView.image = DiceModel.randomDiceImage()
+        diceTwoImageView.image = DiceModel.randomDiceImage()
+    }
 }
 

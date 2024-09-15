@@ -11,6 +11,7 @@
 		FAA03A002C95092B0006C11B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA039FF2C95092B0006C11B /* SceneDelegate.swift */; };
 		FAA03A022C95092B0006C11B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA03A012C95092B0006C11B /* ViewController.swift */; };
 		FAA03A072C95092D0006C11B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA03A062C95092D0006C11B /* Assets.xcassets */; };
+		FAA03A122C960ECF0006C11B /* DiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA03A112C960ECF0006C11B /* DiceModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		FAA03A012C95092B0006C11B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FAA03A062C95092D0006C11B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAA03A0B2C95092D0006C11B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAA03A112C960ECF0006C11B /* DiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				FAA03A012C95092B0006C11B /* ViewController.swift */,
 				FAA03A062C95092D0006C11B /* Assets.xcassets */,
 				FAA03A0B2C95092D0006C11B /* Info.plist */,
+				FAA03A112C960ECF0006C11B /* DiceModel.swift */,
 			);
 			path = Dicee;
 			sourceTree = "<group>";
@@ -130,6 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA03A122C960ECF0006C11B /* DiceModel.swift in Sources */,
 				FAA03A022C95092B0006C11B /* ViewController.swift in Sources */,
 				FAA039FE2C95092B0006C11B /* AppDelegate.swift in Sources */,
 				FAA03A002C95092B0006C11B /* SceneDelegate.swift in Sources */,
