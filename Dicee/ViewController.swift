@@ -49,7 +49,13 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
-
+    
+    let topContainerView = UIView()
+    let middleContainerView = UIView()
+    let bottomContainerView = UIView()
+    var mainStackView = UIStackView()
+    var diceStackView = UIStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,39 +63,81 @@ class ViewController: UIViewController {
     }
     
     private func configureUI() {
+        setupBackgroundImageView()
+        setupMainStackView()
+        setupContainersView()
+        setupElementsInContainerViews()
+        
+        rollButton.addTarget(self, action: #selector(rollDice), for: .touchUpInside)
+    }
+    
+    private func setupContainersView() {
+        let containersView = [topContainerView, middleContainerView, bottomContainerView]
+        
+        containersView.forEach {
+            mainStackView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    private func setupMainStackView() {
+        mainStackView = UIStackView(arrangedSubviews: [topContainerView, middleContainerView, bottomContainerView])
+        
+        view.addSubview(mainStackView)
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.axis = .vertical
+        mainStackView.distribution = .fillEqually
+        
+        NSLayoutConstraint.activate([
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+    
+    private func setupElementsInContainerViews() {
+        topContainerView.addSubview(logoImageView)
+        bottomContainerView.addSubview(rollButton)
+        
+        setupDiceStackView()
+        
+        NSLayoutConstraint.activate([
+            
+            logoImageView.centerXAnchor.constraint(equalTo: topContainerView.centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: topContainerView.centerYAnchor),
+            
+            rollButton.widthAnchor.constraint(equalToConstant: 150),
+            rollButton.centerXAnchor.constraint(equalTo: bottomContainerView.centerXAnchor),
+            rollButton.centerYAnchor.constraint(equalTo: bottomContainerView.centerYAnchor)
+        ])
+    }
+    
+    private func setupDiceStackView() {
+        diceStackView = UIStackView(arrangedSubviews: [diceOneImageView, diceTwoImageView])
+        diceStackView.translatesAutoresizingMaskIntoConstraints = false
+        diceStackView.axis = .horizontal
+        diceStackView.spacing = 50
+        diceStackView.alignment = .center
+        diceStackView.distribution = .fillEqually
+        
+        middleContainerView.addSubview(diceStackView)
+        
+        NSLayoutConstraint.activate([
+            diceStackView.centerXAnchor.constraint(equalTo: middleContainerView.centerXAnchor),
+            diceStackView.centerYAnchor.constraint(equalTo: middleContainerView.centerYAnchor)
+        ])
+    }
+    
+    private func setupBackgroundImageView() {
         view.addSubview(backgroundImageView)
-        view.addSubview(logoImageView)
-        view.addSubview(diceOneImageView)
-        view.addSubview(diceTwoImageView)
-        view.addSubview(rollButton)
         
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
-            logoImageView.widthAnchor.constraint(equalToConstant: 150),
-            logoImageView.heightAnchor.constraint(equalToConstant: 150),
-            
-            diceOneImageView.widthAnchor.constraint(equalToConstant: 120),
-            diceOneImageView.heightAnchor.constraint(equalToConstant: 120),
-            diceOneImageView.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 30),
-            diceOneImageView.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -20),
-            
-            diceTwoImageView.widthAnchor.constraint(equalToConstant: 120),
-            diceTwoImageView.heightAnchor.constraint(equalToConstant: 120),
-            diceTwoImageView.topAnchor.constraint(equalTo: diceOneImageView.topAnchor),
-            diceTwoImageView.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20),
-            
-            rollButton.topAnchor.constraint(equalTo: diceOneImageView.bottomAnchor, constant: 35),
-            rollButton.widthAnchor.constraint(equalToConstant: 150),
-            rollButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
-        rollButton.addTarget(self, action: #selector(rollDice), for: .touchUpInside)
     }
     
     @objc private func rollDice() {
